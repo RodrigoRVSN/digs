@@ -3,7 +3,7 @@ import axios from 'axios';
 const key = process.env.NEXT_PUBLIC_PINATA_API_KEY as string;
 const secret = process.env.NEXT_PUBLIC_PINATA_API_SECRET as string;
 
-export const pinJSONToIPFS = async json => {
+export const pinJSONToIPFS = async (json: any): Promise<any> => {
   const url = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
 
   return axios
@@ -21,7 +21,10 @@ export const pinJSONToIPFS = async json => {
     });
 };
 
-export const pinFileToIPFS = async (file, pinataMetaData) => {
+export const pinFileToIPFS = async (
+  file: any,
+  pinataMetaData: any
+): Promise<any> => {
   const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
   const data = new FormData();
@@ -33,7 +36,9 @@ export const pinFileToIPFS = async (file, pinataMetaData) => {
     .post(url, data, {
       maxBodyLength: Infinity,
       headers: {
-        'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+        'Content-Type': `multipart/form-data; boundary=${
+          (data as any)._boundary
+        }`,
         pinata_api_key: key,
         pinata_secret_api_key: secret,
       },

@@ -1,17 +1,6 @@
 {
   "name": "next_ts",
   "private": true,
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "yarn lint",
-      "yarn test --watchAll=false --findRelatedTests --bail"
-    ]
-  },
   "scripts": {
     "cy:open": "npx cypress open",
     "cy:run": "npx cypress run",
@@ -19,7 +8,6 @@
     "build": "next build",
     "start": "next start",
     "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
-    "prepare": "husky install",
     "lint": "eslint --fix .",
     "test": "jest"
   },
@@ -56,11 +44,9 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^5.0.0",
-    "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1",
     "jest-dom": "^4.0.0",
-    "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4"
