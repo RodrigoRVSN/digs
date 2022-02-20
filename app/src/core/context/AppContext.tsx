@@ -129,7 +129,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
     setDigs([]);
 
-    sanityResponse.forEach(async item => {
+    sanityResponse.forEach(async (item: any) => {
       const profileImageUrl = await getNftProfileImage(
         item.author.profileImage,
         item.author.isProfileImageNft

@@ -45,6 +45,9 @@
       "@App/services/*": [
         "src/services/*"
       ],
+      "@Lib/*": [
+        "lib/*"
+      ],
     }
   },
   "include": [

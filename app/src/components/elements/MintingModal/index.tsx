@@ -1,22 +1,28 @@
 import { useApp } from '@App/core/context/AppContext';
-import { client } from 'lib/client';
-import { pinFileToIPFS, pinJSONToIPFS } from 'lib/pinata';
+import { client } from '@Lib/client';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { ethers } from 'ethers';
-import { contractABI, contractAddress } from 'lib/constants';
+import { contractABI, contractAddress } from '@Lib/constants';
+import { pinFileToIPFS, pinJSONToIPFS } from '@Lib/pinata';
 import FinishedState from './FinishedState';
 import InitialState from './InitialState';
 import LoadingState from './LoadingState';
 
-let metamask: Window;
+let metamask: any;
 
 if (typeof window !== 'undefined') {
-  metamask = window.ethereum;
+  metamask = (window as any).ethereum;
 }
 
-const getEthereumContract = async () => {
-  if (!metamask) return;
+interface Metadata {
+  name: string;
+  description: string;
+  image: string;
+}
+
+const getEthereumContract = async (): Promise<ethers.Contract | undefined> => {
+  if (!metamask) return undefined;
   const provider = new ethers.providers.Web3Provider(metamask);
   const signer = provider.getSigner();
   const transactionContract = new ethers.Contract(
@@ -37,7 +43,7 @@ const ProfileImageMinter = (): JSX.Element => {
   const [status, setStatus] = useState('initial');
   const [profileImage, setProfileImage] = useState<File>();
 
-  const mint = async () => {
+  const mint = async (): Promise<void> => {
     if (!name || !description || !profileImage) return;
     setStatus('loading');
 
@@ -66,7 +72,7 @@ const ProfileImageMinter = (): JSX.Element => {
     const transactionParameters = {
       to: contractAddress,
       from: currentAccount,
-      data: await contract.mint(currentAccount, `ipfs://${ipfsJsonHash}`),
+      data: await contract?.mint(currentAccount, `ipfs://${ipfsJsonHash}`),
     };
 
     try {
@@ -82,7 +88,7 @@ const ProfileImageMinter = (): JSX.Element => {
     }
   };
 
-  const renderLogic = (modalStatus = status) => {
+  const renderLogic = (modalStatus = status): ReactNode => {
     switch (modalStatus) {
       case 'initial':
         return (
@@ -106,7 +112,7 @@ const ProfileImageMinter = (): JSX.Element => {
       default:
         router.push('/');
         setAppStatus('error');
-        break;
+        return <></>;
     }
   };
 

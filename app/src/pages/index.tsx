@@ -1,7 +1,7 @@
 import ProfileImageMinter from '@App/components/elements/MintingModal';
 import { client } from 'lib/client';
 import Head from 'next/head';
-import { ReactNode, useState } from 'react';
+import { FormEvent, ReactNode, useState } from 'react';
 import Modal from 'react-modal';
 import { useApp } from '../core/context/AppContext';
 
@@ -17,7 +17,7 @@ export default function Home(): JSX.Element {
   const [digsMesssage, setDigsMessage] = useState('');
   const [openModal, setOpenModal] = useState(false);
 
-  const postDigs = async ev => {
+  const postDigs = async (ev: FormEvent): Promise<void> => {
     ev.preventDefault();
     if (!digsMesssage) return;
 
@@ -74,7 +74,7 @@ export default function Home(): JSX.Element {
       <Modal isOpen={openModal} onRequestClose={() => setOpenModal(false)}>
         <ProfileImageMinter />
       </Modal>
-      {digs.map(item => (
+      {digs.map((item: any) => (
         <h2>
           {item.author.name} - {item.digs}
         </h2>
