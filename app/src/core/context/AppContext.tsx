@@ -111,9 +111,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     if (isNft) {
       return `https://gateway.pinata.cloud/ipfs/${imageUri}`;
     }
-    if (!isNft) {
-      return imageUri;
-    }
+    return imageUri;
   };
 
   const fetchDigs = async () => {
