@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
     notConnected: <NoUserFound />,
     noMetaMask: <NoMetaMaskFound />,
     error: <Error />,
-    default: <Loading />,
+    loading: <Loading />,
   };
 
   return <div>{app[appStatus]}</div>;
