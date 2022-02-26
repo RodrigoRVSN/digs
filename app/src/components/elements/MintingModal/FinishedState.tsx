@@ -1,4 +1,4 @@
-import { useApp } from '@App/core/context/AppContext';
+import { useApp } from '@App/core/hooks/useApp';
 import { useEffect } from 'react';
 
 const FinishedState = (): JSX.Element => {

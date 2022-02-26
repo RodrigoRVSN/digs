@@ -59,6 +59,7 @@
     "react/require-default-props": "off",
     "import/no-extraneous-dependencies": "off",
     "no-underscore-dangle": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "react/jsx-filename-extension": [
       1,
       {

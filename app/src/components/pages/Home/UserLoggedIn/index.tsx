@@ -1,5 +1,5 @@
 import ProfileImageMinter from '@App/components/elements/MintingModal';
-import { useApp } from '@App/core/context/AppContext';
+import { useApp } from '@App/core/hooks/useApp';
 import { client } from '@Lib/client';
 import Head from 'next/head';
 import { FormEvent, useState } from 'react';
@@ -67,7 +67,7 @@ export const UserLoggedIn = (): JSX.Element => {
       <Modal isOpen={openModal} onRequestClose={() => setOpenModal(false)}>
         <ProfileImageMinter />
       </Modal>
-      {digs.map((item: any) => (
+      {digs.map(item => (
         <h2>
           {item.author.name} - {item.digs}
         </h2>

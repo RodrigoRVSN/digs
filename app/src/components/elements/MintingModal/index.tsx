@@ -1,18 +1,19 @@
-import { useApp } from '@App/core/context/AppContext';
 import { client } from '@Lib/client';
 import { useRouter } from 'next/router';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { ethers } from 'ethers';
-import { contractABI, contractAddress } from '@Lib/constants';
+import { contractAddress } from '@Lib/constants';
 import { pinFileToIPFS, pinJSONToIPFS } from '@Lib/pinata';
+import { useApp } from '@App/core/hooks/useApp';
 import FinishedState from './FinishedState';
 import InitialState from './InitialState';
 import LoadingState from './LoadingState';
+import { getEthereumContract } from './utils/getEthereumContract';
 
-let metamask: any;
+let metamask: ethers.providers.ExternalProvider;
 
 if (typeof window !== 'undefined') {
-  metamask = (window as any).ethereum;
+  metamask = window.ethereum;
 }
 
 interface Metadata {
@@ -21,17 +22,8 @@ interface Metadata {
   image: string;
 }
 
-const getEthereumContract = async (): Promise<ethers.Contract | undefined> => {
-  if (!metamask) return undefined;
-  const provider = new ethers.providers.Web3Provider(metamask);
-  const signer = provider.getSigner();
-  const transactionContract = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  );
-
-  return transactionContract;
+type mintOptionsProps = {
+  [key: string]: JSX.Element | (() => void);
 };
 
 const ProfileImageMinter = (): JSX.Element => {
@@ -67,7 +59,7 @@ const ProfileImageMinter = (): JSX.Element => {
 
     const ipfsJsonHash = await pinJSONToIPFS(imageMetaData);
 
-    const contract = await getEthereumContract();
+    const contract = await getEthereumContract(metamask);
 
     const transactionParameters = {
       to: contractAddress,
@@ -76,47 +68,40 @@ const ProfileImageMinter = (): JSX.Element => {
     };
 
     try {
+      if (!metamask.request) return;
       await metamask.request({
         method: 'eth_sendTransaction',
         params: [transactionParameters],
       });
 
       setStatus('finished');
-    } catch (error: any) {
-      console.log(error);
-      setStatus('finished');
+    } catch {
+      setStatus('error');
     }
   };
 
-  const renderLogic = (modalStatus = status): ReactNode => {
-    switch (modalStatus) {
-      case 'initial':
-        return (
-          <InitialState
-            profileImage={profileImage!}
-            setProfileImage={setProfileImage}
-            name={name}
-            setName={setName}
-            description={description}
-            setDescription={setDescription}
-            mint={mint}
-          />
-        );
-
-      case 'loading':
-        return <LoadingState />;
-
-      case 'finished':
-        return <FinishedState />;
-
-      default:
-        router.push('/');
-        setAppStatus('error');
-        return <></>;
-    }
+  const renderLogic: mintOptionsProps = {
+    initial: (
+      <InitialState
+        profileImage={profileImage!}
+        setProfileImage={setProfileImage}
+        name={name}
+        setName={setName}
+        description={description}
+        setDescription={setDescription}
+        mint={mint}
+      />
+    ),
+    loading: <LoadingState />,
+    finished: <FinishedState />,
+    error: () => {
+      router.push('/');
+      setAppStatus('error');
+      return <></>;
+    },
   };
 
-  return <>{renderLogic()}</>;
+  return <>{renderLogic[status]}</>;
 };
 
 export default ProfileImageMinter;

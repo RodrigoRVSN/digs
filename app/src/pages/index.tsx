@@ -5,7 +5,7 @@ import {
   NoUserFound,
   UserLoggedIn,
 } from '@App/components/pages/Home';
-import { useApp } from '../core/context/AppContext';
+import { useApp } from '@App/core/hooks/useApp';
 
 type appOptionsProps = {
   [key: string]: JSX.Element;

@@ -19,8 +19,6 @@ const InitialState = ({
   setDescription,
   mint,
 }: InitialStateProps): JSX.Element => {
-  console.log(profileImage);
-
   return (
     <>
       <label htmlFor="image-upload">
