@@ -1,9 +1,14 @@
+import { Metadata } from '@App/components/elements/MintingModal';
 import axios from 'axios';
 
 const key = process.env.NEXT_PUBLIC_PINATA_API_KEY as string;
 const secret = process.env.NEXT_PUBLIC_PINATA_API_SECRET as string;
 
-export const pinJSONToIPFS = async (json: any): Promise<any> => {
+interface PinataMetaDataProps {
+  name: string;
+}
+
+export const pinJSONToIPFS = async (json: Metadata): Promise<string> => {
   const url = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
 
   return axios
@@ -22,9 +27,9 @@ export const pinJSONToIPFS = async (json: any): Promise<any> => {
 };
 
 export const pinFileToIPFS = async (
-  file: any,
-  pinataMetaData: any
-): Promise<any> => {
+  file: File,
+  pinataMetaData: PinataMetaDataProps
+): Promise<string> => {
   const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
   const data = new FormData();
@@ -43,10 +48,10 @@ export const pinFileToIPFS = async (
         pinata_secret_api_key: secret,
       },
     })
-    .then(function (response) {
+    .then(response => {
       return response.data.IpfsHash;
     })
-    .catch(function (error) {
+    .catch(error => {
       console.log(error);
     });
 };

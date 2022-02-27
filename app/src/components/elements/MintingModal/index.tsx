@@ -16,7 +16,7 @@ if (typeof window !== 'undefined') {
   metamask = window.ethereum;
 }
 
-interface Metadata {
+export interface Metadata {
   name: string;
   description: string;
   image: string;
