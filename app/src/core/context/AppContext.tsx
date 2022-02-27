@@ -162,8 +162,8 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
       const response = await client.fetch(query);
 
       const profileImageUri = await getNftProfileImage(
-        response[0].profileImage,
-        response[0].isProfileImageNft
+        response[0]?.profileImage,
+        response[0]?.isProfileImageNft
       );
 
       setCurrentUser({

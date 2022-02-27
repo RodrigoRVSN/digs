@@ -1,13 +1,9 @@
-import ProfileImageMinter from '@App/components/elements/MintingModal';
 import { useApp } from '@App/core/hooks/useApp';
 import { client } from '@Lib/client';
-import Head from 'next/head';
 import { FormEvent, useState } from 'react';
-import Modal from 'react-modal';
 
 export const UserLoggedIn = (): JSX.Element => {
-  const { currentUser, digs, currentAccount, fetchDigs } = useApp();
-  const [openModal, setOpenModal] = useState(false);
+  const { currentUser, currentAccount, fetchDigs } = useApp();
   const [digsMesssage, setDigsMessage] = useState('');
 
   const postDigs = async (ev: FormEvent): Promise<void> => {
@@ -47,10 +43,7 @@ export const UserLoggedIn = (): JSX.Element => {
 
   return (
     <>
-      <Head>
-        <title>Home</title>
-      </Head>
-      <h1>oi {currentUser.name}</h1>
+      <h1 style={{ color: '$terciary' }}>oi {currentUser.name}</h1>
       <img src={currentUser.coverImage} alt={currentUser.name} />
       <form onSubmit={postDigs}>
         <textarea
@@ -60,18 +53,6 @@ export const UserLoggedIn = (): JSX.Element => {
         />
         <button type="submit">enviar</button>
       </form>
-
-      <button type="button" onClick={() => setOpenModal(true)}>
-        abrir modal
-      </button>
-      <Modal isOpen={openModal} onRequestClose={() => setOpenModal(false)}>
-        <ProfileImageMinter />
-      </Modal>
-      {digs.map(item => (
-        <h2>
-          {item.author.name} - {item.digs}
-        </h2>
-      ))}
     </>
   );
 };
