@@ -1,12 +1,12 @@
-# next_ts_template
+# Digs
 
 <!--- https://shields.io --->
 
-![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/next_ts_template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/next_ts_template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/next_ts_template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/next_ts_template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/next_ts_template?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/digs?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/digs?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/digs?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/digs?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/digs?style=for-the-badge)
 
 ___
 <!--- #################### mudar badges #################### --->
@@ -17,7 +17,9 @@ ___
 
 <!--- #################### mudar imagem exemplo #################### --->
 ___
-> This is a NextJS template made with linters and patterns.
+
+> This is a Social Media made with Nextjs + Blockchain + Sanity DB. You can mint your images and publish in the opensea (for example) to sell.
+
 ___
 ## 💻 Prerequisites
 
@@ -28,26 +30,31 @@ ___
 
 - Typescript
 - <b>Nextjs</b>
+- Next UI
+- Ethers
 - Axios
-- Cypress
-- Jest
-- Linters
+- Sanity DB
+- Solidity
+- Hardhat
+- Openzeppelin
+- Pinata
 
 <!--- #################### mudar ferramentas #################### --->
 ___
-## 🚀 Installing next_ts_template
+## 🚀 Installing digs
 
 To use, follow the steps:
 
 ```js
-sanity start to run studio
+yarn
 
+sanity start in /sanity to run studio
 yarn dev to run app
 ```
 
-## 📫 Contribuiting with next_ts_template
+## 📫 Contribuiting with digs
 
-To contribue with next_ts_template, follow the steps:
+To contribue with digs, follow the steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <name_branch>`.
