@@ -1,11 +1,12 @@
 import { Loading, styled } from '@nextui-org/react';
 
 const LoadingContainer = styled(Loading, {
-  margin: 'auto',
-  width: '100%',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  direction: 'column',
+  justify: 'center',
+  width: '100vw',
+  margin: 'auto',
 });
 
 export const LoadingPage = (): JSX.Element => {

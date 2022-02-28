@@ -151,7 +151,7 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
 
   const getCurrentUserDetails = useCallback(
     async (userAccount = currentAccount): Promise<void> => {
-      if (appStatus !== 'connected') return;
+      if (appStatus !== 'connected' || !userAccount) return;
 
       const query = `
       *[_type == "users" && _id == "${userAccount}"]{
@@ -186,7 +186,7 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
     checkIfWalletIsConnected();
     fetchDigs();
     getCurrentUserDetails();
-  }, [currentAccount]);
+  }, [appStatus, currentAccount]);
 
   return (
     <AppContext.Provider

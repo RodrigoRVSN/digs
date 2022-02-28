@@ -6,6 +6,7 @@ import { contractAddress } from '@Lib/constants';
 import { pinFileToIPFS, pinJSONToIPFS } from '@Lib/pinata';
 import { useApp } from '@App/core/hooks/useApp';
 import { LoadingPage } from '@App/components/pages/Home';
+import { Loading } from '@nextui-org/react';
 import FinishedState from './FinishedState';
 import InitialState from './InitialState';
 import { getEthereumContract } from './utils/getEthereumContract';
@@ -92,7 +93,7 @@ const ProfileImageMinter = (): JSX.Element => {
         mint={mint}
       />
     ),
-    loading: <LoadingPage />,
+    loading: <Loading style={{ margin: '32px' }} />,
     finished: <FinishedState />,
     error: () => {
       router.push('/');
