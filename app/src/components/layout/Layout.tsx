@@ -6,7 +6,7 @@ interface ILayout {
 }
 
 const LayoutContainer = styled(Container, {
-  marginTop: '$md',
+  marginTop: '$xlg',
 });
 
 export const Layout = ({ children }: ILayout): JSX.Element => {

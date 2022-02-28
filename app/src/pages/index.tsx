@@ -13,9 +13,7 @@ type appOptionsProps = {
   [key: string]: JSX.Element;
 };
 
-const MainContainer = styled('main', {
-  width: '80%',
-});
+const MainContainer = styled('main', {});
 
 export default function Home(): JSX.Element {
   const { appStatus } = useApp();

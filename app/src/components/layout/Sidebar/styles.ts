@@ -1,10 +1,11 @@
 import { Button, styled } from '@nextui-org/react';
 
 export const SidebarContainer = styled('aside', {
-  width: '20%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
+  borderRight: '1px solid $gray_2',
+  paddingRight: '$xlg',
 });
 
 export const ItemMenu = styled(Button, {
