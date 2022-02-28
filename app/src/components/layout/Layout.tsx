@@ -1,14 +1,18 @@
-import { Container } from '@nextui-org/react';
+import { Container, styled } from '@nextui-org/react';
 import { ReactNode } from 'react';
 
 interface ILayout {
   children: ReactNode;
 }
 
+const LayoutContainer = styled(Container, {
+  marginTop: '$md',
+});
+
 export const Layout = ({ children }: ILayout): JSX.Element => {
   return (
-    <Container lg display="flex" style={{ marginTop: '16px' }}>
+    <LayoutContainer lg display="flex">
       {children}
-    </Container>
+    </LayoutContainer>
   );
 };

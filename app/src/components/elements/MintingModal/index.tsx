@@ -5,9 +5,9 @@ import { ethers } from 'ethers';
 import { contractAddress } from '@Lib/constants';
 import { pinFileToIPFS, pinJSONToIPFS } from '@Lib/pinata';
 import { useApp } from '@App/core/hooks/useApp';
+import { LoadingPage } from '@App/components/pages/Home';
 import FinishedState from './FinishedState';
 import InitialState from './InitialState';
-import LoadingState from './LoadingState';
 import { getEthereumContract } from './utils/getEthereumContract';
 
 let metamask: ethers.providers.ExternalProvider;
@@ -33,7 +33,7 @@ const ProfileImageMinter = (): JSX.Element => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('initial');
-  const [profileImage, setProfileImage] = useState<File>();
+  const [profileImage, setProfileImage] = useState({} as File);
 
   const mint = async (): Promise<void> => {
     if (!name || !description || !profileImage) return;
@@ -92,7 +92,7 @@ const ProfileImageMinter = (): JSX.Element => {
         mint={mint}
       />
     ),
-    loading: <LoadingState />,
+    loading: <LoadingPage />,
     finished: <FinishedState />,
     error: () => {
       router.push('/');

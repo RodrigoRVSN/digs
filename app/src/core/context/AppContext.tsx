@@ -7,7 +7,11 @@ import {
 } from 'react';
 import { useRouter } from 'next/router';
 import { client } from 'lib/client';
-import { IAppContextProps, ICurrentUser } from '../types/IAppContextProps';
+import {
+  IAppContextProps,
+  ICurrentUser,
+  IDigs,
+} from '../types/IAppContextProps';
 
 export const AppContext = createContext({} as IAppContextProps);
 
@@ -17,7 +21,7 @@ interface AppProviderProps {
 
 export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
   const [appStatus, setAppStatus] = useState('');
-  const [digs, setDigs] = useState([]);
+  const [digs, setDigs] = useState([] as IDigs[]);
   const [currentUser, setCurrentUser] = useState({} as ICurrentUser);
   const [currentAccount, setCurrentAccount] = useState('');
 
@@ -116,11 +120,11 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
       }|order(timestamp desc)
     `;
 
-    const sanityResponse = await client.fetch(query);
+    const sanityResponse = (await client.fetch(query)) as IDigs[];
 
     setDigs([]);
 
-    sanityResponse.forEach(async (item: any) => {
+    sanityResponse.forEach(async item => {
       const profileImageUrl = await getNftProfileImage(
         item.author.profileImage,
         item.author.isProfileImageNft
@@ -138,9 +142,9 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
           },
         };
 
-        setDigs(prevState => [...prevState, newItem] as any);
+        setDigs(prevState => [...prevState, newItem]);
       } else {
-        setDigs(prevState => [...prevState, item] as any);
+        setDigs(prevState => [...prevState, item]);
       }
     });
   }, []);
@@ -182,7 +186,7 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
     checkIfWalletIsConnected();
     getCurrentUserDetails();
     fetchDigs();
-  }, [checkIfWalletIsConnected, fetchDigs, getCurrentUserDetails]);
+  }, []);
 
   return (
     <AppContext.Provider

@@ -1,8 +1,9 @@
+import { Button, Input, Text, Modal } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
 
 interface InitialStateProps {
   profileImage: File;
-  setProfileImage: Dispatch<SetStateAction<File | undefined>>;
+  setProfileImage: Dispatch<SetStateAction<File>>;
   name: string;
   setName: Dispatch<SetStateAction<string>>;
   description: string;
@@ -21,40 +22,47 @@ const InitialState = ({
 }: InitialStateProps): JSX.Element => {
   return (
     <>
-      <label htmlFor="image-upload">
+      <Modal.Header>
+        <Text size={34}>Mint</Text>
+      </Modal.Header>
+
+      <Modal.Body
+        style={{
+          paddingTop: '40px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '40px',
+        }}
+      >
+        <Input
+          labelPlaceholder="Title of Image"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+
+        <Input
+          labelPlaceholder="Description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
+
         <input
           type="file"
-          id="image-upload"
-          accept=".jpg, .jpeg, .png"
           placeholder="Image URL"
           onChange={e => setProfileImage(e.target.files![0])}
         />
-        Select File
-      </label>
+      </Modal.Body>
 
-      <input
-        type="text"
-        placeholder="Title of Image"
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      />
-      <span>Everyone can see this</span>
-      <button
-        type="button"
-        onClick={() => {
-          if (name && description && profileImage) {
-            mint();
-          }
-        }}
-      >
-        Mint
-      </button>
+      <Modal.Footer>
+        <Button
+          color="secondary"
+          type="button"
+          disabled={!name || !description || !profileImage.name}
+          onClick={() => mint()}
+        >
+          Mint
+        </Button>
+      </Modal.Footer>
     </>
   );
 };

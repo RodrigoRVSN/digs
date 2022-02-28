@@ -1,7 +1,17 @@
-export const Loading = (): JSX.Element => {
+import { Loading, styled } from '@nextui-org/react';
+
+const LoadingContainer = styled(Loading, {
+  margin: 'auto',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+export const LoadingPage = (): JSX.Element => {
   return (
-    <>
-      <h1>...............!!!!!!!!!</h1>
-    </>
+    <LoadingContainer color="white" textColor="white">
+      Loading...
+    </LoadingContainer>
   );
 };
