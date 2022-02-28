@@ -10,7 +10,7 @@ export interface IAuthor {
 
 export interface IDigs {
   digs: string;
-  timestamp: string;
+  timestamp: Date;
   author: IAuthor;
 }
 

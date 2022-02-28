@@ -3,14 +3,13 @@ import { client } from '@Lib/client';
 import {
   Avatar,
   Button,
-  Container,
   Grid,
   Spacer,
   Text,
   Textarea,
 } from '@nextui-org/react';
 import { FormEvent, useState } from 'react';
-import { FormMessage } from './styles';
+import { FormMessage, MessageContainer } from './styles';
 
 export const UserSubmitMessage = (): JSX.Element => {
   const { currentUser, currentAccount, fetchDigs } = useApp();
@@ -52,7 +51,7 @@ export const UserSubmitMessage = (): JSX.Element => {
   };
 
   return (
-    <Container>
+    <MessageContainer>
       <Text h1 size={34}>
         Home
       </Text>
@@ -90,6 +89,6 @@ export const UserSubmitMessage = (): JSX.Element => {
           </FormMessage>
         </Grid>
       </Grid.Container>
-    </Container>
+    </MessageContainer>
   );
 };
