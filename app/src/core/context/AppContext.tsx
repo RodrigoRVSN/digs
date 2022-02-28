@@ -20,7 +20,7 @@ interface AppProviderProps {
 }
 
 export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
-  const [appStatus, setAppStatus] = useState('');
+  const [appStatus, setAppStatus] = useState('loading');
   const [digs, setDigs] = useState([] as IDigs[]);
   const [currentUser, setCurrentUser] = useState({} as ICurrentUser);
   const [currentAccount, setCurrentAccount] = useState('');
@@ -166,8 +166,8 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
       const response = await client.fetch(query);
 
       const profileImageUri = await getNftProfileImage(
-        response[0]?.profileImage,
-        response[0]?.isProfileImageNft
+        response[0].profileImage,
+        response[0].isProfileImageNft
       );
 
       setCurrentUser({
@@ -184,9 +184,9 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
-    getCurrentUserDetails();
     fetchDigs();
-  }, []);
+    getCurrentUserDetails();
+  }, [currentAccount]);
 
   return (
     <AppContext.Provider

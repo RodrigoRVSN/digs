@@ -18,6 +18,7 @@ export const Sidebar = (): JSX.Element => {
 
       {itensSidebar.map(item => (
         <S.ItemMenu
+          key={item.id}
           light
           icon={<Iconly name={item.icon} style={{ marginRight: '8px' }} />}
           onClick={() =>
